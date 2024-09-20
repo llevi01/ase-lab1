@@ -1,15 +1,7 @@
 plugins {
-    java
-    jacoco
+    id("hu.bme.mit.ase.shingler.gradle.java")
 }
 
-java.toolchain {
-    languageVersion.set(JavaLanguageVersion.of(21))
-}
-
-repositories {
-    mavenCentral()
-}
 
 val picoCliVersion = "4.7.6"
 val slf4jVersion = "1.7.36"
@@ -27,14 +19,4 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 }
 
-tasks {
-    test {
-        useJUnitPlatform()
-        testLogging.showStandardStreams = true
-        finalizedBy(jacocoTestReport)
-    }
 
-    jacocoTestReport {
-        inputs.files(test.get().outputs)
-    }
-}
